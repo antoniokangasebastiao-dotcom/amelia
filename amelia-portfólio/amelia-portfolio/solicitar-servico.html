@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solicitar Serviço | Amélia Evaristo - Kumosi Impact Lab</title>
+
+<!-- Meta tags -->
+<meta name="description" content="Solicite serviços de consultoria social, formação, mentoria e gestão de projetos. Preencha o formulário e entraremos em contacto.">
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- CSS Personalizado -->
+<link rel="stylesheet" href="style.css">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YXW7FHWN6Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YXW7FHWN6Y');
+</script>
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a1929">
+
+<style>
+/* Estilos específicos do formulário */
+
+/* Hero */
+.form-hero {
+    background: linear-gradient(135deg, var(--dark-blue) 0%, var(--blue-medium) 100%);
+    padding: 80px 0 60px;
+    text-align: center;
+}
+
+.form-hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.form-hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Seção do Formulário */
+.form-section {
+    padding: 80px 0;
+}
+
+.form-wrapper {
+    background: rgba(30, 58, 95, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 2rem;
+    border: 1px solid rgba(245, 124, 0, 0.2);
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-title h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.form-title p {
+    opacity: 0.7;
+}
+
+/* Campos do Formulário */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-label i {
+    color: var(--orange);
+}
+
+.form-control, .form-select {
+    background: rgba(10, 25, 41, 0.8);
+    border: 1px solid rgba(245, 124, 0, 0.3);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: var(--white);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    background: rgba(10, 25, 41, 0.9);
+    border-color: var(--orange);
+    box-shadow: 0 0 0 3px rgba(245, 124, 0, 0.2);
+    color: var(--white);
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Botão de Envio */
+.btn-submit {
+    background: linear-gradient(135deg, var(--orange), var(--orange-light));
+    color: var(--dark-blue);
+    padding: 14px 40px;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(245, 124, 0, 0.3);
+}
+
+.btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Informações de contacto */
+.contact-info {
+    background: rgba(30, 58, 95, 0.3);
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.contact-info h4 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--orange);
+}
+
+.contact-info p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.contact-info i {
+    color: var(--orange);
+    margin-right: 8px;
+}
+
+/* Alertas */
+.alert-custom {
+    border-radius: 12px;
+    padding: 1rem;
+    margin-top: 1rem;
+    border: none;
+}
+
+.alert-success-custom {
+    background: rgba(40, 167, 69, 0.2);
+    border: 1px solid #28a745;
+    color: #28a745;
+}
+
+.alert-error-custom {
+    background: rgba(220, 53, 69, 0.2);
+    border: 1px solid #dc3545;
+    color: #dc3545;
+}
+
+/* Loading Spinner */
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--dark-blue);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Informações adicionais */
+.info-cards {
+    margin-top: 3rem;
+}
+
+.info-card-item {
+    background: rgba(30, 58, 95, 0.3);
+    border-radius: 15px;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.info-card-item:hover {
+    background: rgba(245, 124, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.info-card-item i {
+    font-size: 1.5rem;
+    color: var(--orange);
+    margin-bottom: 0.5rem;
+}
+
+.info-card-item h5 {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .form-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .form-wrapper {
+        padding: 1.5rem;
+    }
+    
+    .form-title h2 {
+        font-size: 1.5rem;
+    }
+    
+    .btn-submit {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-wrapper {
+    animation: fadeIn 0.5s ease-out;
+}
+</style>
+
+</head>
+
+<body>
+
+<script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+        .then(() => console.log("Service Worker ativo"))
+        .catch(err => console.log("Erro:", err));
+}
+</script>
+
+<!-- NAVBAR MELHORADA -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <span class="brand-name">Amélia</span><span class="brand-orange">Evaristo</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+                <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfólio</a></li>
+                <li class="nav-item"><a class="nav-link" href="servicos.html">Serviços</a></li>
+                <li class="nav-item"><a class="nav-link active" href="solicitar-servico.html">Solicitar Serviço</a></li>
+                <li class="nav-item"><a class="nav-link" href="marketplace.html">Marketplace</a></li>
+                <li class="nav-item"><a class="nav-link" href="media.html">Media</a></li>
+                <li class="nav-item"><a class="nav-link" href="projetos.html">Projetos</a></li>
+                <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO MELHORADO -->
+<section class="form-hero">
+    <div class="container">
+        <h1>Solicitar <span class="orange-text">Serviço</span></h1>
+        <div class="orange-line mx-auto"></div>
+        <p>Preencha o formulário abaixo para solicitar um serviço ou consultoria. Entraremos em contacto o mais breve possível.</p>
+    </div>
+</section>
+
+<!-- FORMULÁRIO MELHORADO -->
+<section class="form-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="form-wrapper">
+                    <div class="form-title">
+                        <h2><i class="fas fa-pen-alt" style="color: var(--orange);"></i> Pedido de Serviço</h2>
+                        <div class="orange-line mx-auto"></div>
+                        <p>Conte-nos sobre o seu projeto e como podemos ajudar</p>
+                    </div>
+
+                    <form id="formServico">
+                        <!-- Nome -->
+                        <div class="form-group">
+                            <label class="form-label" for="nome">
+                                <i class="fas fa-user"></i> Nome Completo <span style="color: var(--orange);">*</span>
+                            </label>
+                            <input type="text" id="nome" name="nome" class="form-control" 
+                                   placeholder="Digite seu nome completo" required>
+                            <div class="invalid-feedback" id="nomeError"></div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label class="form-label" for="email">
+                                <i class="fas fa-envelope"></i> Email <span style="color: var(--orange);">*</span>
+                            </label>
+                            <input type="email" id="email" name="email" class="form-control" 
+                                   placeholder="seu@email.com" required>
+                            <div class="invalid-feedback" id="emailError"></div>
+                        </div>
+
+                        <!-- Telefone -->
+                        <div class="form-group">
+                            <label class="form-label" for="telefone">
+                                <i class="fas fa-phone"></i> Telefone/WhatsApp
+                            </label>
+                            <input type="tel" id="telefone" name="telefone" class="form-control" 
+                                   placeholder="+244 XXX XXX XXX">
+                        </div>
+
+                        <!-- Tipo de Serviço -->
+                        <div class="form-group">
+                            <label class="form-label" for="servico">
+                                <i class="fas fa-briefcase"></i> Serviço Pretendido <span style="color: var(--orange);">*</span>
+                            </label>
+                            <select id="servico" name="servico" class="form-select" required>
+                                <option value="">Selecione um serviço</option>
+                                <option value="Consultoria Social">📊 Consultoria Social</option>
+                                <option value="Gestão de Projetos">📋 Gestão de Projetos</option>
+                                <option value="Capacitação/Formação">🎓 Capacitação / Formação</option>
+                                <option value="Inovação Social">💡 Inovação Social</option>
+                                <option value="Organização de Eventos">📅 Organização de Eventos</option>
+                                <option value="Projetos Educacionais">📚 Projetos Educacionais</option>
+                                <option value="Mentoria">🤝 Mentoria</option>
+                                <option value="Outro">🔧 Outro</option>
+                            </select>
+                            <div class="invalid-feedback" id="servicoError"></div>
+                        </div>
+
+                        <!-- Orçamento Estimado -->
+                        <div class="form-group">
+                            <label class="form-label" for="orcamento">
+                                <i class="fas fa-coins"></i> Orçamento Estimado (Opcional)
+                            </label>
+                            <select id="orcamento" name="orcamento" class="form-select">
+                                <option value="">Selecione uma faixa</option>
+                                <option value="Até 50.000 Kz">Até 50.000 Kz</option>
+                                <option value="50.000 - 150.000 Kz">50.000 - 150.000 Kz</option>
+                                <option value="150.000 - 300.000 Kz">150.000 - 300.000 Kz</option>
+                                <option value="Acima de 300.000 Kz">Acima de 300.000 Kz</option>
+                                <option value="A definir">A definir</option>
+                            </select>
+                        </div>
+
+                        <!-- Descrição -->
+                        <div class="form-group">
+                            <label class="form-label" for="descricao">
+                                <i class="fas fa-align-left"></i> Descrição do Pedido <span style="color: var(--orange);">*</span>
+                            </label>
+                            <textarea id="descricao" name="descricao" class="form-control" 
+                                      rows="5" placeholder="Explique detalhadamente o serviço que pretende. Quanto mais detalhes, melhor poderemos atendê-lo." required></textarea>
+                            <div class="invalid-feedback" id="descricaoError"></div>
+                        </div>
+
+                        <!-- Prazo -->
+                        <div class="form-group">
+                            <label class="form-label" for="prazo">
+                                <i class="fas fa-calendar-alt"></i> Prazo Desejado (Opcional)
+                            </label>
+                            <input type="date" id="prazo" name="prazo" class="form-control">
+                        </div>
+
+                        <!-- Botão Enviar -->
+                        <div class="text-center">
+                            <button type="submit" class="btn-submit" id="submitBtn">
+                                <i class="fas fa-paper-plane"></i> Enviar Pedido
+                            </button>
+                        </div>
+
+                        <div id="mensagem" class="text-center mt-4"></div>
+                    </form>
+
+                    <!-- Informações de Contacto Alternativo -->
+                    <div class="contact-info">
+                        <h4><i class="fas fa-headset"></i> Prefere falar diretamente?</h4>
+                        <p><i class="fab fa-whatsapp"></i> WhatsApp: +244 XXX XXX XXX</p>
+                        <p><i class="fas fa-envelope"></i> Email: ameliaevaristo@kumosi.com</p>
+                        <p><small>Respondemos em até 24h úteis</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cards de Informação -->
+        <div class="info-cards">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="info-card-item">
+                        <i class="fas fa-clock"></i>
+                        <h5>Resposta Rápida</h5>
+                        <small>Até 24h úteis</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-card-item">
+                        <i class="fas fa-lock"></i>
+                        <h5>Dados Seguros</h5>
+                        <small>Suas informações estão protegidas</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-card-item">
+                        <i class="fas fa-handshake"></i>
+                        <h5>Atendimento Personalizado</h5>
+                        <small>Solução sob medida para você</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER MELHORADO -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h4>Amélia Evaristo</h4>
+                <p>Construindo Impacto Social com Tecnologia</p>
+                <p><small>Kumosi Impact Lab</small></p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="servicos.html">Serviços</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h4>Redes Sociais</h4>
+                <div class="social-links">
+                    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                </div>
+                <p class="mt-3">
+                    <i class="fas fa-envelope"></i> ameliaevaristo@kumosi.com
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <hr>
+                <p>&copy; 2026 Amélia Evaristo - Kumosi Impact Lab. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Script Melhorado do Formulário -->
+<script>
+    const form = document.getElementById("formServico");
+    const submitBtn = document.getElementById("submitBtn");
+    const mensagemDiv = document.getElementById("mensagem");
+
+    // Validação de email
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+
+    // Validação de telefone (opcional)
+    function validatePhone(phone) {
+        if (!phone) return true;
+        const re = /^[\+\d\s\-\(\)]{9,}$/;
+        return re.test(phone);
+    }
+
+    // Limpar erros
+    function clearErrors() {
+        document.querySelectorAll('.is-invalid').forEach(el => {
+            el.classList.remove('is-invalid');
+        });
+        document.querySelectorAll('.invalid-feedback').forEach(el => {
+            el.innerHTML = '';
+        });
+    }
+
+    // Mostrar erro
+    function showError(fieldId, message) {
+        const field = document.getElementById(fieldId);
+        const errorDiv = document.getElementById(`${fieldId}Error`);
+        if (field) field.classList.add('is-invalid');
+        if (errorDiv) errorDiv.innerHTML = message;
+    }
+
+    // Enviar formulário
+    form.addEventListener("submit", async function(e) {
+        e.preventDefault();
+        
+        // Limpar erros anteriores
+        clearErrors();
+        
+        // Obter valores
+        const nome = document.getElementById("nome").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const telefone = document.getElementById("telefone").value.trim();
+        const servico = document.getElementById("servico").value;
+        const descricao = document.getElementById("descricao").value.trim();
+        const orcamento = document.getElementById("orcamento").value;
+        const prazo = document.getElementById("prazo").value;
+        
+        let isValid = true;
+        
+        // Validar nome
+        if (!nome) {
+            showError("nome", "Por favor, informe seu nome completo");
+            isValid = false;
+        } else if (nome.length < 3) {
+            showError("nome", "Nome deve ter pelo menos 3 caracteres");
+            isValid = false;
+        }
+        
+        // Validar email
+        if (!email) {
+            showError("email", "Por favor, informe seu email");
+            isValid = false;
+        } else if (!validateEmail(email)) {
+            showError("email", "Por favor, informe um email válido");
+            isValid = false;
+        }
+        
+        // Validar telefone (se informado)
+        if (telefone && !validatePhone(telefone)) {
+            showError("telefone", "Número de telefone inválido");
+            isValid = false;
+        }
+        
+        // Validar serviço
+        if (!servico) {
+            showError("servico", "Por favor, selecione um serviço");
+            isValid = false;
+        }
+        
+        // Validar descrição
+        if (!descricao) {
+            showError("descricao", "Por favor, descreva o serviço pretendido");
+            isValid = false;
+        } else if (descricao.length < 20) {
+            showError("descricao", "Por favor, forneça mais detalhes (mínimo 20 caracteres)");
+            isValid = false;
+        }
+        
+        if (!isValid) {
+            // Scroll para o primeiro erro
+            const firstError = document.querySelector('.is-invalid');
+            if (firstError) {
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return;
+        }
+        
+        // Mostrar loading
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<span class="spinner"></span> Enviando...';
+        submitBtn.disabled = true;
+       
+
+
+
+
+
+// No lugar do setTimeout, use:
+const formData = new FormData(form);
+
+try {
+    const response = await fetch('backend/enviar-contato.php', {
+        method: 'POST',
+        body: formData
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+        msgDiv.innerHTML = `
+            <div class="alert-success-custom">
+                <i class="fas fa-check-circle"></i> 
+                ${result.message}
+            </div>
+        `;
+        form.reset();
+    } else if (result.errors) {
+        // Mostrar erros
+        let errosHtml = '<div class="alert-danger-custom"><ul>';
+        for (const [campo, erro] of Object.entries(result.errors)) {
+            errosHtml += `<li>${erro}</li>`;
+        }
+        errosHtml += '</ul></div>';
+        msgDiv.innerHTML = errosHtml;
+    }
+} catch (error) {
+    msgDiv.innerHTML = '<div class="alert-danger-custom">Erro ao enviar. Tente novamente.</div>';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Remover erro ao digitar
+    document.querySelectorAll('.form-control, .form-select').forEach(field => {
+        field.addEventListener('input', function() {
+            this.classList.remove('is-invalid');
+            const errorId = `${this.id}Error`;
+            const errorDiv = document.getElementById(errorId);
+            if (errorDiv) errorDiv.innerHTML = '';
+        });
+    });
+
+    // Scroll automático se houver hash #formServico no URL
+    window.addEventListener("load", () => {
+        if(window.location.hash === "#formServico") {
+            document.getElementById("formServico").scrollIntoView({ behavior: "smooth" });
+        }
+    });
+</script>
+
+</body>
+</html>

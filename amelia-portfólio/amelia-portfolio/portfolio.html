@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfólio | Amélia Evaristo - Kumosi Impact Lab</title>
+
+<!-- Meta tags -->
+<meta name="description" content="Portfólio de projetos de impacto social de Amélia Evaristo. Conheça as iniciativas que transformam comunidades em Angola.">
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- CSS Personalizado -->
+<link rel="stylesheet" href="style.css">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a1929">
+
+<style>
+/* Estilos específicos do Portfólio */
+
+/* Hero */
+.portfolio-hero {
+    background: linear-gradient(135deg, var(--dark-blue) 0%, var(--blue-medium) 100%);
+    padding: 80px 0 60px;
+    text-align: center;
+}
+
+.portfolio-hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.portfolio-hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Filtros */
+.portfolio-filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+}
+
+.filter-btn {
+    background: rgba(30, 58, 95, 0.5);
+    border: 1px solid rgba(245, 124, 0, 0.3);
+    color: var(--white);
+    padding: 10px 25px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--orange);
+    color: var(--dark-blue);
+    border-color: var(--orange);
+}
+
+/* Grid do Portfólio */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.portfolio-card {
+    background: rgba(30, 58, 95, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(245, 124, 0, 0.2);
+    position: relative;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--orange);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.portfolio-image {
+    position: relative;
+    overflow: hidden;
+    height: 250px;
+}
+
+.portfolio-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.portfolio-card:hover .portfolio-image img {
+    transform: scale(1.1);
+}
+
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(245, 124, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.portfolio-card:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-overlay a {
+    color: var(--dark-blue);
+    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.portfolio-overlay a:hover {
+    transform: scale(1.1);
+    background: var(--dark-blue);
+    color: var(--orange);
+}
+
+.portfolio-content {
+    padding: 1.5rem;
+}
+
+.portfolio-category {
+    display: inline-block;
+    background: rgba(245, 124, 0, 0.2);
+    color: var(--orange);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.portfolio-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.portfolio-content p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+}
+
+.portfolio-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1rem;
+}
+
+.tag {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.7rem;
+}
+
+.portfolio-stats {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.8rem;
+}
+
+.stat i {
+    color: var(--orange);
+}
+
+/* Modal de Detalhes */
+.modal-custom {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-custom.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--dark-blue);
+    max-width: 900px;
+    width: 90%;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--orange);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    color: var(--orange);
+    margin: 0;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.modal-close:hover {
+    color: var(--orange);
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-body img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.modal-body h3 {
+    color: var(--orange);
+    margin: 1rem 0 0.5rem;
+}
+
+/* Seção de Estatísticas */
+.stats-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, var(--blue-medium) 0%, var(--dark-blue) 100%);
+}
+
+.stat-card {
+    background: rgba(10, 25, 41, 0.5);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid rgba(245, 124, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--orange);
+}
+
+.stat-card i {
+    font-size: 3rem;
+    color: var(--orange);
+    margin-bottom: 1rem;
+}
+
+.stat-card h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+    opacity: 0.8;
+    margin: 0;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .portfolio-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .filter-btn {
+        padding: 6px 15px;
+        font-size: 0.8rem;
+    }
+    
+    .portfolio-image {
+        height: 200px;
+    }
+}
+
+/* Animações */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.portfolio-card {
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+</style>
+
+</head>
+<body>
+
+<script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+        .then(() => console.log("Service Worker ativo"))
+        .catch(err => console.log("Erro:", err));
+}
+</script>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <span class="brand-name">Amélia</span><span class="brand-orange">Evaristo</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto">
+
+
+        <a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+        <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfólio</a></li>
+        <li class="nav-item"><a class="nav-link" href="servicos.html">Serviços</a></li>
+        <li class="nav-item"><a class="nav-link" href="solicitar-servico.html">Solicitar Serviços</a></li>
+        <li class="nav-item"><a class="nav-link" href="marketplace.html">Marketplace</a></li>
+        <li class="nav-item"><a class="nav-link active" href="media.html">Media</a></li>
+                <li class="nav-item"><a class="nav-link active" href="projetos.html">Projectos</a></li>
+        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+
+
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="portfolio-hero">
+    <div class="container">
+        <h1>Meu <span class="orange-text">Portfólio</span></h1>
+        <div class="orange-line mx-auto"></div>
+        <p>Conheça os projetos de impacto social que já realizei e as transformações que ajudamos a construir em Angola.</p>
+    </div>
+</section>
+
+<!-- PORTFÓLIO -->
+<section class="container py-5">
+    <!-- Filtros -->
+    <div class="portfolio-filters">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="educacao">Educação</button>
+        <button class="filter-btn" data-filter="saude">Saúde</button>
+        <button class="filter-btn" data-filter="empreendedorismo">Empreendedorismo</button>
+        <button class="filter-btn" data-filter="tecnologia">Tecnologia</button>
+    </div>
+
+    <!-- Grid de Projetos -->
+    <div class="portfolio-grid" id="portfolioGrid"></div>
+</section>
+
+<!-- SEÇÃO DE ESTATÍSTICAS -->
+<section class="stats-section">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-3 col-6">
+                <div class="stat-card">
+                    <i class="fas fa-project-diagram"></i>
+                    <h3>15+</h3>
+                    <p>Projetos Realizados</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3>1000+</h3>
+                    <p>Beneficiários</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3>10+</h3>
+                    <p>Parceiros</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-card">
+                    <i class="fas fa-trophy"></i>
+                    <h3>5+</h3>
+                    <p>Prêmios</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MODAL DE DETALHES -->
+<div id="projectModal" class="modal-custom">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitle">Projeto</h2>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h4>Amélia Evaristo</h4>
+                <p>Construindo Impacto Social com Tecnologia</p>
+                <p><small>Kumosi Impact Lab</small></p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="portfolio.html">Portfólio</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h4>Redes Sociais</h4>
+                <div class="social-links">
+                    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                </div>
+                <p class="mt-3">
+                    <i class="fas fa-envelope"></i> ameliaevaristo@kumosi.com
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <hr>
+                <p>&copy; 2026 Amélia Evaristo - Kumosi Impact Lab. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// Dados dos projetos
+const projects = [
+    {
+        id: 1,
+        title: "Educação para Todos",
+        category: "educacao",
+        description: "Projeto que levou educação de qualidade para mais de 200 jovens em comunidades carentes de Luanda.",
+        fullDescription: "Este projeto foi desenvolvido em parceria com escolas locais e voluntários. Oferecemos aulas de reforço, material escolar e formação para professores. O impacto foi significativo, com melhoria de 40% no desempenho escolar dos participantes.",
+        image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=250&fit=crop",
+        tags: ["Educação", "Jovens", "Comunidade"],
+        beneficiaries: 200,
+        year: 2024,
+        location: "Luanda, Angola"
+    },
+    {
+        id: 2,
+        title: "Saúde Comunitária",
+        category: "saude",
+        description: "Campanhas de saúde e vacinação que atenderam mais de 500 pessoas em áreas remotas.",
+        fullDescription: "Realizamos campanhas de vacinação, palestras sobre saúde preventiva e distribuímos medicamentos básicos. O projeto contou com o apoio de profissionais de saúde voluntários e alcançou comunidades que nunca tinham recebido assistência médica.",
+        image: "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=400&h=250&fit=crop",
+        tags: ["Saúde", "Vacinação", "Prevenção"],
+        beneficiaries: 500,
+        year: 2024,
+        location: "Benguela, Angola"
+    },
+    {
+        id: 3,
+        title: "Jovens Empreendedores",
+        category: "empreendedorismo",
+        description: "Formação em empreendedorismo para 150 jovens, com mentoria e microcrédito.",
+        fullDescription: "Programa completo de capacitação empreendedora incluindo workshops de business plan, marketing digital, finanças e acesso a microcrédito. 30 novos negócios foram abertos após o programa.",
+        image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&h=250&fit=crop",
+        tags: ["Empreendedorismo", "Formação", "Microcrédito"],
+        beneficiaries: 150,
+        year: 2025,
+        location: "Luanda, Angola"
+    },
+    {
+        id: 4,
+        title: "Tech for Good",
+        category: "tecnologia",
+        description: "Laboratório de tecnologia para jovens, ensinando programação e robótica.",
+        fullDescription: "Criamos um laboratório de informática com 20 computadores e oferecemos cursos de programação, robótica e design digital. Os jovens participantes desenvolveram aplicativos para resolver problemas locais.",
+        image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=250&fit=crop",
+        tags: ["Tecnologia", "Programação", "Inovação"],
+        beneficiaries: 100,
+        year: 2025,
+        location: "Huíla, Angola"
+    },
+    {
+        id: 5,
+        title: "Empoderamento Feminino",
+        category: "educacao",
+        description: "Programa de capacitação para mulheres em situação de vulnerabilidade.",
+        fullDescription: "Oferecemos cursos de artesanato, gestão de pequenos negócios e alfabetização para 80 mulheres. Muitas delas conseguiram gerar renda própria e melhorar suas condições de vida.",
+        image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=250&fit=crop",
+        tags: ["Mulheres", "Capacitação", "Empoderamento"],
+        beneficiaries: 80,
+        year: 2024,
+        location: "Cabinda, Angola"
+    },
+    {
+        id: 6,
+        title: "Alimentação Solidária",
+        category: "saude",
+        description: "Distribuição de alimentos e nutrição para famílias carentes.",
+        fullDescription: "Projeto emergencial que distribuiu cestas básicas e ofereceu orientação nutricional para 300 famílias durante períodos de crise.",
+        image: "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=400&h=250&fit=crop",
+        tags: ["Alimentação", "Solidariedade", "Nutrição"],
+        beneficiaries: 300,
+        year: 2024,
+        location: "Luanda, Angola"
+    }
+];
+
+let currentFilter = 'all';
+
+// Renderizar projetos
+const portfolioGrid = document.getElementById('portfolioGrid');
+
+function renderProjects() {
+    const filtered = currentFilter === 'all' 
+        ? projects 
+        : projects.filter(p => p.category === currentFilter);
+    
+    portfolioGrid.innerHTML = filtered.map(project => `
+        <div class="portfolio-card" data-category="${project.category}">
+            <div class="portfolio-image">
+                <img src="${project.image}" alt="${project.title}" loading="lazy">
+                <div class="portfolio-overlay">
+                    <a href="#" onclick="openModal(${project.id}); return false;">
+                        <i class="fas fa-search-plus"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="portfolio-content">
+                <span class="portfolio-category">
+                    ${project.category === 'educacao' ? '📚 Educação' : 
+                      project.category === 'saude' ? '🏥 Saúde' :
+                      project.category === 'empreendedorismo' ? '💼 Empreendedorismo' : 
+                      '💻 Tecnologia'}
+                </span>
+                <h3>${project.title}</h3>
+                <p>${project.description}</p>
+                <div class="portfolio-tags">
+                    ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                </div>
+                <div class="portfolio-stats">
+                    <div class="stat">
+                        <i class="fas fa-users"></i>
+                        <span>${project.beneficiaries}+</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-calendar"></i>
+                        <span>${project.year}</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>${project.location.split(',')[0]}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Filtros
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        renderProjects();
+    });
+});
+
+// Modal
+const modal = document.getElementById('projectModal');
+
+function openModal(projectId) {
+    const project = projects.find(p => p.id === projectId);
+    if (!project) return;
+    
+    document.getElementById('modalTitle').innerHTML = project.title;
+    
+    document.getElementById('modalBody').innerHTML = `
+        <img src="${project.image}" alt="${project.title}">
+        
+        <h3>Sobre o Projeto</h3>
+        <p>${project.fullDescription}</p>
+        
+        <h3>Detalhes</h3>
+        <ul style="list-style: none; padding: 0;">
+            <li><i class="fas fa-users" style="color: var(--orange);"></i> <strong>Beneficiários:</strong> ${project.beneficiaries}+ pessoas</li>
+            <li><i class="fas fa-calendar" style="color: var(--orange);"></i> <strong>Ano:</strong> ${project.year}</li>
+            <li><i class="fas fa-map-marker-alt" style="color: var(--orange);"></i> <strong>Localização:</strong> ${project.location}</li>
+            <li><i class="fas fa-tags" style="color: var(--orange);"></i> <strong>Categorias:</strong> ${project.tags.join(', ')}</li>
+        </ul>
+        
+        <h3>Resultados Alcançados</h3>
+        <p>Este projeto gerou um impacto positivo significativo na comunidade, com melhorias mensuráveis na qualidade de vida dos beneficiários e fortalecimento do tecido social local.</p>
+        
+        <div style="margin-top: 1.5rem; text-align: center;">
+            <a href="contacto.html" class="btn-orange" style="display: inline-block;">Quero apoiar projetos assim</a>
+        </div>
+    `;
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// Fechar modal com ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Inicializar
+renderProjects();
+</script>
+
+</body>
+</html>

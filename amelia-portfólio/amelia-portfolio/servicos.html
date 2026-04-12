@@ -1,0 +1,682 @@
+<!DOCTYPE html> 
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serviços | Amélia Evaristo - Kumosi Impact Lab</title>
+
+<!-- Meta tags -->
+<meta name="description" content="Serviços de consultoria social, gestão de projetos, capacitação, inovação social e muito mais. Soluções estratégicas para impacto em Angola.">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M3H1NBYTLX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-M3H1NBYTLX');
+</script>
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- CSS Personalizado -->
+<link rel="stylesheet" href="style.css">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a1929">
+
+<style>
+/* Estilos específicos da página de Serviços */
+
+/* Hero */
+.services-hero {
+    background: linear-gradient(135deg, var(--dark-blue) 0%, var(--blue-medium) 100%);
+    padding: 80px 0 60px;
+    text-align: center;
+}
+
+.services-hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.services-hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Cards de Serviços */
+.services-section {
+    padding: 80px 0;
+}
+
+.service-card {
+    background: rgba(30, 58, 95, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(245, 124, 0, 0.2);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(245, 124, 0, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.service-card:hover::before {
+    left: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--orange);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(245, 124, 0, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    background: var(--orange);
+    transform: scale(1.1);
+}
+
+.service-icon i,
+.service-icon .bi {
+    font-size: 2.5rem;
+    color: var(--orange);
+    transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon i,
+.service-card:hover .service-icon .bi {
+    color: var(--dark-blue);
+}
+
+.service-card h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.service-card p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+}
+
+.service-features {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    text-align: left;
+}
+
+.service-features li {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.service-features li i {
+    color: var(--orange);
+    font-size: 0.8rem;
+}
+
+.service-link {
+    display: inline-block;
+    color: var(--orange);
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+
+.service-link:hover {
+    color: var(--orange-light);
+    transform: translateX(5px);
+}
+
+/* Seção de Diferenciais */
+.differentials-section {
+    padding: 80px 0;
+    background: rgba(30, 58, 95, 0.3);
+}
+
+.differential-card {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.differential-card i {
+    font-size: 2.5rem;
+    color: var(--orange);
+    margin-bottom: 1rem;
+}
+
+.differential-card h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.differential-card p {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* Seção de Preços (Opcional) */
+.pricing-section {
+    padding: 80px 0;
+}
+
+.pricing-card {
+    background: rgba(30, 58, 95, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(245, 124, 0, 0.2);
+    height: 100%;
+    position: relative;
+}
+
+.pricing-card.featured {
+    border: 2px solid var(--orange);
+    transform: scale(1.05);
+}
+
+.pricing-badge {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: var(--orange);
+    color: var(--dark-blue);
+    padding: 4px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.pricing-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.pricing-price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--orange);
+    margin-bottom: 1rem;
+}
+
+.pricing-price small {
+    font-size: 0.9rem;
+    font-weight: 400;
+    opacity: 0.7;
+}
+
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    text-align: left;
+}
+
+.pricing-features li {
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pricing-features li i {
+    color: var(--orange);
+}
+
+/* CTA Section */
+.cta-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, var(--orange), var(--orange-light));
+    color: var(--dark-blue);
+    text-align: center;
+}
+
+.cta-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.cta-section p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.btn-cta {
+    background: var(--dark-blue);
+    color: var(--white);
+    padding: 12px 35px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-cta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    color: var(--white);
+}
+
+/* Processo de Trabalho */
+.process-section {
+    padding: 80px 0;
+}
+
+.process-step {
+    text-align: center;
+    position: relative;
+}
+
+.process-number {
+    width: 60px;
+    height: 60px;
+    background: var(--orange);
+    color: var(--dark-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 auto 1rem;
+}
+
+.process-step h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.process-step p {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .services-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .service-card {
+        padding: 1.5rem;
+    }
+    
+    .pricing-card.featured {
+        transform: scale(1);
+    }
+    
+    .cta-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .process-step {
+        margin-bottom: 2rem;
+    }
+}
+
+/* Animações */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.service-card, .pricing-card, .differential-card {
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+</style>
+
+</head>
+
+<body>
+
+<script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+        .then(() => console.log("Service Worker ativo"))
+        .catch(err => console.log("Erro:", err));
+}
+</script>
+
+<!-- NAVBAR MELHORADA -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <span class="brand-name">Amélia</span><span class="brand-orange">Evaristo</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto">
+                
+        <a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+        <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfólio</a></li>
+        <li class="nav-item"><a class="nav-link" href="servicos.html">Serviços</a></li>
+        <li class="nav-item"><a class="nav-link" href="solicitar-servico.html">Solicitar Serviços</a></li>
+        <li class="nav-item"><a class="nav-link" href="marketplace.html">Marketplace</a></li>
+        <li class="nav-item"><a class="nav-link active" href="media.html">Media</a></li>
+                <li class="nav-item"><a class="nav-link active" href="projetos.html">Projectos</a></li>
+        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+
+        </div>
+    </div>
+</nav>
+
+<!-- HERO MELHORADO -->
+<section class="services-hero">
+    <div class="container">
+        <h1>Nossos <span class="orange-text">Serviços</span></h1>
+        <div class="orange-line mx-auto"></div>
+        <p>Soluções estratégicas para impacto social, inovação e desenvolvimento comunitário em Angola.</p>
+    </div>
+</section>
+
+<!-- SERVIÇOS PRINCIPAIS -->
+<section class="services-section">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Serviço 1 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Consultoria Social</h4>
+                    <p>Desenvolvimento de estratégias personalizadas para organizações e projetos de impacto social sustentável.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Diagnóstico comunitário</li>
+                        <li><i class="fas fa-check"></i> Planejamento estratégico</li>
+                        <li><i class="fas fa-check"></i> Avaliação de impacto</li>
+                    </ul>
+                    <a href="solicitar-servico.html" class="service-link">Saber mais <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Serviço 2 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h4>Gestão de Projetos</h4>
+                    <p>Planeamento, execução e monitoramento de projetos sociais com resultados mensuráveis e impacto real.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Ciclo completo do projeto</li>
+                        <li><i class="fas fa-check"></i> Gestão de stakeholders</li>
+                        <li><i class="fas fa-check"></i> Relatórios de impacto</li>
+                    </ul>
+                    <a href="solicitar-servico.html" class="service-link">Saber mais <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Serviço 3 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4>Capacitação</h4>
+                    <p>Formação de jovens, líderes comunitários e equipes para potencializar habilidades e conhecimentos.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Workshops práticos</li>
+                        <li><i class="fas fa-check"></i> Mentoria personalizada</li>
+                        <li><i class="fas fa-check"></i> Certificações</li>
+                    </ul>
+                    <a href="solicitar-servico.html" class="service-link">Saber mais <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Serviço 4 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h4>Inovação Social</h4>
+                    <p>Soluções criativas e tecnológicas para desafios sociais complexos em comunidades angolanas.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Design thinking social</li>
+                        <li><i class="fas fa-check"></i> Prototipagem de soluções</li>
+                        <li><i class="fas fa-check"></i> Tecnologia para o bem</li>
+                    </ul>
+                    <a href="solicitar-servico.html" class="service-link">Saber mais <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Serviço 5 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h4>Organização de Eventos</h4>
+                    <p>Planejamento e execução de eventos comunitários, institucionais e de conscientização social.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Eventos comunitários</li>
+                        <li><i class="fas fa-check"></i> Conferências e palestras</li>
+                        <li><i class="fas fa-check"></i> Campanhas sociais</li>
+                    </ul>
+                    <a href="solicitar-servico.html" class="service-link">Saber mais <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Serviço 6 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h4>Projetos Educacionais</h4>
+                    <p>Desenvolvimento e implementação de programas educativos para jovens e comunidades.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Conteúdo pedagógico</li>
+                        <li><i class="fas fa-check"></i> Formação de educadores</li>
+                        <li><i class="fas fa-check"></i> Avaliação de aprendizagem</li>
+                    </ul>
+                    <a href="solicitar-servico.html" class="service-link">Saber mais <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section class="differentials-section">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <h2 class="section-title">Por que escolher <span class="orange-text">nossos serviços?</span></h2>
+                <div class="orange-line mx-auto"></div>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-3 col-6">
+                <div class="differential-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Impacto Mensurável</h4>
+                    <p>Resultados concretos e verificáveis</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="differential-card">
+                    <i class="fas fa-handshake"></i>
+                    <h4>Parcerias Estratégicas</h4>
+                    <p>Rede de colaboradores qualificados</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="differential-card">
+                    <i class="fas fa-clock"></i>
+                    <h4>Compromisso com Prazos</h4>
+                    <p>Entrega no tempo combinado</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="differential-card">
+                    <i class="fas fa-heart"></i>
+                    <h4>Paixão pelo que fazemos</h4>
+                    <p>Amor e dedicação ao impacto social</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROCESSO DE TRABALHO -->
+<section class="process-section">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <h2 class="section-title">Como <span class="orange-text">trabalhamos</span></h2>
+                <div class="orange-line mx-auto"></div>
+                <p class="section-subtitle">Um processo simples e transparente</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="process-step">
+                    <div class="process-number">1</div>
+                    <h4>Diagnóstico</h4>
+                    <p>Entendemos sua necessidade e contexto</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="process-step">
+                    <div class="process-number">2</div>
+                    <h4>Planejamento</h4>
+                    <p>Desenvolvemos a estratégia personalizada</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="process-step">
+                    <div class="process-number">3</div>
+                    <h4>Execução</h4>
+                    <p>Implementamos com excelência</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="process-step">
+                    <div class="process-number">4</div>
+                    <h4>Avaliação</h4>
+                    <p>Medimos resultados e impacto</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA FINAL MELHORADO -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Precisa de um <span class="orange-text">serviço personalizado?</span></h2>
+        <p>Entre em contacto e vamos construir algo com impacto social duradouro juntos.</p>
+        <a href="solicitar-servico.html" class="btn-cta">
+            <i class="fas fa-paper-plane"></i> Solicitar Agora
+        </a>
+    </div>
+</section>
+
+<!-- FOOTER MELHORADO -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h4>Amélia Evaristo</h4>
+                <p>Construindo Impacto Social com Tecnologia</p>
+                <p><small>Kumosi Impact Lab</small></p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="portfolio.html">Portfólio</a></li>
+                    <li><a href="servicos.html">Serviços</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h4>Redes Sociais</h4>
+                <div class="social-links">
+                    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                </div>
+                <p class="mt-3">
+                    <i class="fas fa-envelope"></i> ameliaevaristo@kumosi.com
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <hr>
+                <p>&copy; 2026 Amélia Evaristo - Kumosi Impact Lab. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

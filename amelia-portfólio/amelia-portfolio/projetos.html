@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projetos | Amélia Evaristo - Kumosi Impact Lab</title>
+
+<!-- Meta tags -->
+<meta name="description" content="Conheça os projetos de impacto social da Amélia Evaristo e Kumosi Impact Lab. Apoie iniciativas que transformam comunidades em Angola.">
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- CSS Personalizado -->
+<link rel="stylesheet" href="style.css">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a1929">
+
+<style>
+/* Estilos específicos da página de Projetos */
+
+/* Hero */
+.projects-hero {
+    background: linear-gradient(135deg, var(--dark-blue) 0%, var(--blue-medium) 100%);
+    padding: 80px 0 60px;
+    text-align: center;
+}
+
+.projects-hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.projects-hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Cards de Projetos */
+.projects-section {
+    padding: 80px 0;
+}
+
+.project-card {
+    background: rgba(30, 58, 95, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(245, 124, 0, 0.2);
+    height: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--orange);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.project-image {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.1);
+}
+
+.project-status {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    z-index: 1;
+}
+
+.status-em-curso {
+    background: var(--orange);
+    color: var(--dark-blue);
+}
+
+.status-concluido {
+    background: #28a745;
+    color: white;
+}
+
+.status-planejado {
+    background: #17a2b8;
+    color: white;
+}
+
+.project-content {
+    padding: 1.5rem;
+}
+
+.project-content h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.project-content p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+}
+
+.project-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-item {
+    text-align: center;
+    flex: 1;
+}
+
+.stat-number {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--orange);
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+
+.btn-details {
+    background: rgba(245, 124, 0, 0.2);
+    border: 1px solid var(--orange);
+    color: var(--orange);
+    padding: 8px 20px;
+    border-radius: 30px;
+    width: 100%;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.btn-details:hover {
+    background: var(--orange);
+    color: var(--dark-blue);
+}
+
+/* Modal Personalizado */
+.modal-custom-content {
+    background: var(--dark-blue);
+    border-radius: 20px;
+    border: 1px solid var(--orange);
+}
+
+.modal-custom-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(245, 124, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-custom-header h3 {
+    color: var(--orange);
+    margin: 0;
+}
+
+.modal-custom-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.modal-custom-close:hover {
+    color: var(--orange);
+}
+
+.modal-custom-body {
+    padding: 1.5rem;
+}
+
+.modal-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.modal-gallery img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.modal-gallery img:hover {
+    transform: scale(1.05);
+}
+
+.modal-description {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.modal-info {
+    background: rgba(30, 58, 95, 0.5);
+    border-radius: 15px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.modal-info p {
+    margin-bottom: 0.5rem;
+}
+
+.modal-info i {
+    color: var(--orange);
+    width: 25px;
+}
+
+.donation-section {
+    background: rgba(30, 58, 95, 0.3);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.donation-section h5 {
+    color: var(--orange);
+    margin-bottom: 1rem;
+}
+
+.donation-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.donation-input-group input {
+    flex: 1;
+    background: rgba(10, 25, 41, 0.8);
+    border: 1px solid rgba(245, 124, 0, 0.3);
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+}
+
+.donation-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-paypal {
+    background: #0070ba;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    flex: 1;
+}
+
+.btn-multicaixa {
+    background: #00a859;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    flex: 1;
+}
+
+.btn-pix {
+    background: #32bcad;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    flex: 1;
+}
+
+/* Estatísticas */
+.stats-section {
+    padding: 60px 0;
+    background: rgba(30, 58, 95, 0.3);
+}
+
+.stat-card {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.stat-card i {
+    font-size: 2.5rem;
+    color: var(--orange);
+    margin-bottom: 1rem;
+}
+
+.stat-card h3 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.stat-card p {
+    opacity: 0.8;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .projects-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .modal-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .donation-buttons {
+        flex-direction: column;
+    }
+    
+    .stat-card h3 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Animações */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.project-card {
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+</style>
+
+</head>
+
+<body>
+
+<script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+        .then(() => console.log("Service Worker ativo"))
+        .catch(err => console.log("Erro:", err));
+}
+</script>
+
+<!-- NAVBAR MELHORADA -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <span class="brand-name">Amélia</span><span class="brand-orange">Evaristo</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto">
+
+                 
+        <a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+        <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfólio</a></li>
+        <li class="nav-item"><a class="nav-link" href="servicos.html">Serviços</a></li>
+        <li class="nav-item"><a class="nav-link" href="solicitar-servico.html">Solicitar Serviços</a></li>
+        <li class="nav-item"><a class="nav-link" href="marketplace.html">Marketplace</a></li>
+        <li class="nav-item"><a class="nav-link active" href="media.html">Media</a></li>
+                <li class="nav-item"><a class="nav-link active" href="projetos.html">Projectos</a></li>
+        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO MELHORADO -->
+<section class="projects-hero">
+    <div class="container">
+        <h1>Nossos <span class="orange-text">Projetos</span></h1>
+        <div class="orange-line mx-auto"></div>
+        <p>Explore os projetos de impacto social e apoie iniciativas que transformam comunidades em Angola.</p>
+    </div>
+</section>
+
+<!-- PROJETOS -->
+<section class="projects-section">
+    <div class="container">
+        <div class="row g-4" id="projects-container"></div>
+    </div>
+</section>
+
+<!-- ESTATÍSTICAS DE IMPACTO -->
+<section class="stats-section">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-3 col-6">
+                <div class="stat-card">
+                    <i class="fas fa-project-diagram"></i>
+                    <h3>12+</h3>
+                    <p>Projetos Realizados</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3>500+</h3>
+                    <p>Beneficiários Diretos</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-card">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h3>1000+</h3>
+                    <p>Pessoas Impactadas</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>5+</h3>
+                    <p>Anos de Atuação</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MODAL CUSTOMIZADO -->
+<div id="projectModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content modal-custom-content">
+            <div class="modal-custom-header">
+                <h3 id="modalTitle"></h3>
+                <button type="button" class="modal-custom-close" data-bs-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-custom-body">
+                <div id="modalGallery" class="modal-gallery"></div>
+                <p id="modalDescription" class="modal-description"></p>
+                <div class="modal-info">
+                    <p><i class="fas fa-tag"></i> <strong>Status:</strong> <span id="modalStatus"></span></p>
+                    <p><i class="fas fa-calendar"></i> <strong>Início:</strong> <span id="modalStartDate"></span></p>
+                    <p><i class="fas fa-users"></i> <strong>Beneficiários:</strong> <span id="modalBeneficiaries"></span></p>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Local:</strong> <span id="modalLocation"></span></p>
+                </div>
+                
+                <div class="donation-section">
+                    <h5><i class="fas fa-heart"></i> Apoiar este projeto</h5>
+                    <div class="donation-input-group">
+                        <input type="number" id="donationAmount" class="form-control" placeholder="Valor em USD" min="1">
+                        <select id="donationCurrency" class="form-select" style="width: auto;">
+                            <option value="USD">USD</option>
+                            <option value="EUR">EUR</option>
+                            <option value="AOA">AOA</option>
+                        </select>
+                    </div>
+                    <div class="donation-buttons">
+                        <button class="btn-paypal" id="paypalBtn">
+                            <i class="fab fa-paypal"></i> PayPal
+                        </button>
+                        <button class="btn-multicaixa" id="multicaixaBtn">
+                            <i class="fas fa-credit-card"></i> Multicaixa
+                        </button>
+                        <button class="btn-pix" id="pixBtn">
+                            <i class="fas fa-qrcode"></i> PIX
+                        </button>
+                    </div>
+                    <p class="text-center mt-3 small">
+                        <i class="fas fa-lock"></i> Pagamento 100% seguro
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER MELHORADO -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h4>Amélia Evaristo</h4>
+                <p>Construindo Impacto Social com Tecnologia</p>
+                <p><small>Kumosi Impact Lab</small></p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="portfolio.html">Portfólio</a></li>
+                    <li><a href="servicos.html">Serviços</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h4>Redes Sociais</h4>
+                <div class="social-links">
+                    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                </div>
+                <p class="mt-3">
+                    <i class="fas fa-envelope"></i> ameliaevaristo@kumosi.com
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <hr>
+                <p>&copy; 2026 Amélia Evaristo - Kumosi Impact Lab. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+// LISTA DE PROJETOS (AMPLIADA)
+const projects = [
+    {
+        id: 1,
+        name: "Juventude Empreendedora",
+        status: "Em curso",
+        startDate: "Janeiro 2025",
+        beneficiaries: "150 jovens",
+        location: "Luanda, Angola",
+        images: [
+            "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=300&h=200&fit=crop",
+            "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=300&h=200&fit=crop"
+        ],
+        description: "Capacitação de jovens para empreendedorismo e liderança. O projeto oferece workshops, mentoria e microcrédito para jovens iniciarem seus próprios negócios.",
+        goal: 5000,
+        raised: 3200
+    },
+    {
+        id: 2,
+        name: "Comunidade Activa",
+        status: "Concluído",
+        startDate: "Março 2024",
+        beneficiaries: "300 famílias",
+        location: "Benguela, Angola",
+        images: [
+            "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=300&h=200&fit=crop",
+            "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=300&h=200&fit=crop"
+        ],
+        description: "Promoção da inclusão social e desenvolvimento comunitário através de atividades culturais, esportivas e educativas.",
+        goal: 3000,
+        raised: 3000
+    },
+    {
+        id: 3,
+        name: "Impacto Social",
+        status: "Em curso",
+        startDate: "Agosto 2025",
+        beneficiaries: "200 pessoas",
+        location: "Huíla, Angola",
+        images: [
+            "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=300&h=200&fit=crop",
+            "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=300&h=200&fit=crop"
+        ],
+        description: "Projetos sociais focados em educação, saúde e apoio comunitário para comunidades vulneráveis.",
+        goal: 8000,
+        raised: 4500
+    },
+    {
+        id: 4,
+        name: "Tech para Todos",
+        status: "Planejado",
+        startDate: "Janeiro 2026",
+        beneficiaries: "100 jovens",
+        location: "Luanda, Angola",
+        images: [
+            "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&h=200&fit=crop",
+            "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=300&h=200&fit=crop"
+        ],
+        description: "Laboratório de tecnologia e programação para jovens de comunidades carentes.",
+        goal: 10000,
+        raised: 0
+    },
+    {
+        id: 5,
+        name: "Saúde para Todos",
+        status: "Em curso",
+        startDate: "Maio 2025",
+        beneficiaries: "500 pessoas",
+        location: "Cabinda, Angola",
+        images: [
+            "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=300&h=200&fit=crop",
+            "https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=300&h=200&fit=crop"
+        ],
+        description: "Campanhas de saúde preventiva, vacinação e distribuição de medicamentos.",
+        goal: 6000,
+        raised: 2100
+    },
+    {
+        id: 6,
+        name: "Empoderamento Feminino",
+        status: "Concluído",
+        startDate: "Fevereiro 2024",
+        beneficiaries: "80 mulheres",
+        location: "Luanda, Angola",
+        images: [
+            "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&h=200&fit=crop",
+            "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=300&h=200&fit=crop"
+        ],
+        description: "Programa de capacitação profissional e empreendedorismo para mulheres.",
+        goal: 4000,
+        raised: 4000
+    }
+];
+
+const container = document.getElementById("projects-container");
+let modalInstance = null;
+
+// Função para obter classe do status
+function getStatusClass(status) {
+    switch(status) {
+        case 'Em curso': return 'status-em-curso';
+        case 'Concluído': return 'status-concluido';
+        case 'Planejado': return 'status-planejado';
+        default: return 'status-em-curso';
+    }
+}
+
+// Gerar cards
+projects.forEach(proj => {
+    const col = document.createElement("div");
+    col.className = "col-md-6 col-lg-4";
+
+    col.innerHTML = `
+        <div class="project-card">
+            <div class="project-image">
+                <img src="${proj.images[0]}" alt="${proj.name}" loading="lazy">
+                <span class="project-status ${getStatusClass(proj.status)}">${proj.status}</span>
+            </div>
+            <div class="project-content">
+                <h3>${proj.name}</h3>
+                <p>${proj.description.substring(0, 80)}...</p>
+                <div class="project-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">${proj.beneficiaries}</div>
+                        <div class="stat-label">Beneficiários</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">$${proj.raised}</div>
+                        <div class="stat-label">Arrecadado</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">${Math.round((proj.raised/proj.goal)*100)}%</div>
+                        <div class="stat-label">Meta</div>
+                    </div>
+                </div>
+                <button class="btn-details" onclick="openProjectModal(${proj.id})">
+                    <i class="fas fa-eye"></i> Ver Detalhes
+                </button>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(col);
+});
+
+// Função global para abrir modal
+window.openProjectModal = function(id) {
+    const proj = projects.find(p => p.id === id);
+    if (!proj) return;
+
+    document.getElementById("modalTitle").innerText = proj.name;
+    document.getElementById("modalDescription").innerText = proj.description;
+    document.getElementById("modalStatus").innerHTML = `<span class="${getStatusClass(proj.status)}" style="padding: 3px 10px; border-radius: 20px;">${proj.status}</span>`;
+    document.getElementById("modalStartDate").innerText = proj.startDate;
+    document.getElementById("modalBeneficiaries").innerText = proj.beneficiaries;
+    document.getElementById("modalLocation").innerText = proj.location;
+
+    // Galeria
+    const gallery = document.getElementById("modalGallery");
+    gallery.innerHTML = "";
+    proj.images.forEach(img => {
+        const imgEl = document.createElement("img");
+        imgEl.src = img;
+        imgEl.alt = proj.name;
+        imgEl.onclick = () => window.open(img, '_blank');
+        gallery.appendChild(imgEl);
+    });
+
+    // Abrir modal
+    if (modalInstance) {
+        modalInstance.dispose();
+    }
+    modalInstance = new bootstrap.Modal(document.getElementById("projectModal"));
+    modalInstance.show();
+};
+
+// Abrir automaticamente via ID na URL
+const params = new URLSearchParams(window.location.search);
+const projectId = params.get("id");
+if (projectId) {
+    setTimeout(() => {
+        openProjectModal(parseInt(projectId));
+    }, 500);
+}
+
+// Doações
+const paypalBtn = document.getElementById("paypalBtn");
+const multicaixaBtn = document.getElementById("multicaixaBtn");
+const pixBtn = document.getElementById("pixBtn");
+
+function getDonationAmount() {
+    const amount = document.getElementById("donationAmount").value;
+    const currency = document.getElementById("donationCurrency").value;
+    if (!amount || amount <= 0) {
+        alert("Por favor, digite um valor válido para doação");
+        return null;
+    }
+    return { amount, currency };
+}
+
+paypalBtn.onclick = () => {
+    const donation = getDonationAmount();
+    if (donation) {
+        window.open(`https://www.paypal.com/donate/?hosted_button_id=SEU_ID&amount=${donation.amount}&currency_code=${donation.currency}`);
+        // Registrar evento
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'donation_click', { method: 'PayPal', amount: donation.amount });
+        }
+    }
+};
+
+multicaixaBtn.onclick = () => {
+    const donation = getDonationAmount();
+    if (donation) {
+        alert(`Será redirecionado para o Multicaixa Express para doação de ${donation.currency} ${donation.amount}\n\nNúmero de conta: 000 123 456 789\nEntidade: 12345\nReferência: KUMOSI${Date.now()}`);
+        // Simulação - em produção, integrar com API do Multicaixa
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'donation_click', { method: 'Multicaixa', amount: donation.amount });
+        }
+    }
+};
+
+pixBtn.onclick = () => {
+    const donation = getDonationAmount();
+    if (donation) {
+        alert(`Chave PIX para doação: ameliaevaristo@kumosi.com\nValor: ${donation.currency} ${donation.amount}\n\nApós o pagamento, envie comprovante para nosso WhatsApp.`);
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'donation_click', { method: 'PIX', amount: donation.amount });
+        }
+    }
+};
+
+});
+</script>
+
+</body>
+</html>

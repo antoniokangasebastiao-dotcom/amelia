@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Media | Amélia Evaristo - Kumosi Impact Lab</title>
+
+<!-- Meta tags -->
+<meta name="description" content="Galeria de fotos e vídeos de eventos, workshops e ações comunitárias de Amélia Evaristo e Kumosi Impact Lab em Angola.">
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- CSS Personalizado -->
+<link rel="stylesheet" href="style.css">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YXW7FHWN6Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YXW7FHWN6Y');
+</script>
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a1929">
+
+<style>
+/* Estilos específicos da página Media */
+
+/* Hero da página */
+.media-hero {
+    background: linear-gradient(135deg, var(--dark-blue) 0%, var(--blue-medium) 100%);
+    padding: 80px 0 60px;
+    text-align: center;
+}
+
+.media-hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.media-hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Seções */
+.media-section {
+    padding: 60px 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.section-header .section-subtitle {
+    color: var(--white);
+    opacity: 0.7;
+}
+
+/* Grid de Fotos */
+.photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.media-card {
+    background: rgba(30, 58, 95, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(245, 124, 0, 0.2);
+    cursor: pointer;
+}
+
+.media-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--orange);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.media-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.media-card:hover img {
+    transform: scale(1.05);
+}
+
+.media-info {
+    padding: 1.5rem;
+}
+
+.media-info h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--orange);
+}
+
+.media-info p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 0;
+}
+
+.media-info .media-date {
+    font-size: 0.8rem;
+    color: var(--orange);
+    margin-top: 0.5rem;
+    display: inline-block;
+}
+
+/* Categorias */
+.category-filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.filter-btn {
+    background: rgba(30, 58, 95, 0.5);
+    border: 1px solid rgba(245, 124, 0, 0.3);
+    color: var(--white);
+    padding: 8px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--orange);
+    color: var(--dark-blue);
+    border-color: var(--orange);
+}
+
+/* Cards de Vídeo */
+.video-card {
+    background: rgba(30, 58, 95, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(245, 124, 0, 0.2);
+    height: 100%;
+}
+
+.video-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--orange);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-info {
+    padding: 1.5rem;
+}
+
+.video-info h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.video-info p {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* Lightbox Modal */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.lightbox-close:hover {
+    color: var(--orange);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .media-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .photos-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .filter-btn {
+        padding: 6px 15px;
+        font-size: 0.8rem;
+    }
+    
+    .media-card img {
+        height: 200px;
+    }
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.media-card, .video-card {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+</style>
+
+</head>
+<body>
+
+<script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+        .then(() => console.log("Service Worker ativo"))
+        .catch(err => console.log("Erro:", err));
+}
+</script>
+
+<!-- NAVBAR MELHORADA -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <span class="brand-name">Amélia</span><span class="brand-orange">Evaristo</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul class="navbar-nav ms-auto">
+
+   
+        <a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+        <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfólio</a></li>
+        <li class="nav-item"><a class="nav-link" href="servicos.html">Serviços</a></li>
+        <li class="nav-item"><a class="nav-link" href="solicitar-servico.html">Solicitar Serviços</a></li>
+        <li class="nav-item"><a class="nav-link" href="marketplace.html">Marketplace</a></li>
+        <li class="nav-item"><a class="nav-link active" href="media.html">Media</a></li>
+                <li class="nav-item"><a class="nav-link active" href="projetos.html">Projectos</a></li>
+        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO MELHORADO -->
+<section class="media-hero">
+    <div class="container">
+        <h1>Galeria de <span class="orange-text">Mídia</span></h1>
+        <div class="orange-line mx-auto"></div>
+        <p>Registros de eventos, workshops e ações comunitárias que marcaram nossa jornada de impacto social em Angola.</p>
+    </div>
+</section>
+
+<!-- GALERIA DE FOTOS -->
+<section class="media-section">
+    <div class="container">
+        <div class="section-header">
+            <h2><span class="orange-text">Fotos</span> e Eventos</h2>
+            <div class="orange-line mx-auto"></div>
+            <p class="section-subtitle">Momentos que registram nossa missão de transformação comunitária</p>
+        </div>
+
+        <!-- Filtros -->
+        <div class="category-filters">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="evento">Eventos</button>
+            <button class="filter-btn" data-filter="workshop">Workshops</button>
+            <button class="filter-btn" data-filter="comunidade">Comunidade</button>
+        </div>
+
+        <!-- Grid de Fotos -->
+        <div class="photos-grid" id="photosGrid"></div>
+    </div>
+</section>
+
+<!-- VÍDEOS -->
+<section class="media-section" style="background: rgba(30, 58, 95, 0.2);">
+    <div class="container">
+        <div class="section-header">
+            <h2><span class="orange-text">Vídeos</span> e Palestras</h2>
+            <div class="orange-line mx-auto"></div>
+            <p class="section-subtitle">Conteúdos que inspiram e compartilham conhecimento</p>
+        </div>
+
+        <div class="row g-4" id="videosGrid"></div>
+    </div>
+</section>
+
+<!-- SEÇÃO DE ESTATÍSTICAS -->
+<section class="media-section">
+    <div class="container">
+        <div class="row g-4 text-center">
+            <div class="col-md-3 col-6">
+                <div class="stat-card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>15+</h3>
+                    <p>Eventos Realizados</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3>1000+</h3>
+                    <p>Participantes</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-card">
+                    <i class="fas fa-camera"></i>
+                    <h3>50+</h3>
+                    <p>Registros Fotográficos</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-card">
+                    <i class="fas fa-play-circle"></i>
+                    <h3>10+</h3>
+                    <p>Vídeos Produzidos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LIGHTBOX PARA IMAGENS -->
+<div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+</div>
+
+<!-- FOOTER MELHORADO -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h4>Amélia Evaristo</h4>
+                <p>Construindo Impacto Social com Tecnologia</p>
+                <p><small>Kumosi Impact Lab</small></p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="portfolio.html">Portfólio</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h4>Redes Sociais</h4>
+                <div class="social-links">
+                    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+                <p class="mt-3">
+                    <i class="fas fa-envelope"></i> ameliaevaristo@kumosi.com
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <hr>
+                <p>&copy; 2026 Amélia Evaristo - Kumosi Impact Lab. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// Dados das fotos
+const photos = [
+    {
+        id: 1,
+        title: "Evento Comunitário",
+        description: "Ação social com jovens em Luanda",
+        category: "evento",
+        image: "imagens/media/evento1.jpg",
+        date: "2025"
+    },
+    {
+        id: 2,
+        title: "Workshop de Liderança",
+        description: "Formação em liderança e inovação para jovens",
+        category: "workshop",
+        image: "imagens/media/workshop.jpg",
+        date: "2025"
+    },
+    {
+        id: 3,
+        title: "Palestra Impacto Social",
+        description: "Discussão sobre impacto social e juventude",
+        category: "evento",
+        image: "imagens/media/evento2.jpg",
+        date: "2024"
+    },
+    {
+        id: 4,
+        title: "Iniciativa de Impacto",
+        description: "Projetos de impacto social e juventude",
+        category: "comunidade",
+        image: "imagens/media/impacto.jpg",
+        date: "2024"
+    },
+    {
+        id: 5,
+        title: "Atividades Comunitárias",
+        description: "Ações comunitárias nas comunidades angolanas",
+        category: "comunidade",
+        image: "imagens/media/comunidade.jpg",
+        date: "2024"
+    },
+    {
+        id: 6,
+        title: "Capacitação de Jovens",
+        description: "Programa de capacitação para jovens empreendedores",
+        category: "workshop",
+        image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&h=250&fit=crop",
+        date: "2025"
+    },
+    {
+        id: 7,
+        title: "Conferência de Inovação",
+        description: "Evento sobre inovação social e tecnologia",
+        category: "evento",
+        image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=250&fit=crop",
+        date: "2025"
+    },
+    {
+        id: 8,
+        title: "Visita Comunitária",
+        description: "Visita às comunidades para entender necessidades",
+        category: "comunidade",
+        image: "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=400&h=250&fit=crop",
+        date: "2024"
+    },
+    {
+        id: 9,
+        title: "Workshop de Tecnologia",
+        description: "Formação em tecnologia para jovens",
+        category: "workshop",
+        image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=250&fit=crop",
+        date: "2025"
+    }
+];
+
+// Dados dos vídeos (substitua pelos seus vídeos reais)
+const videos = [
+    {
+        id: 1,
+        title: "Palestra sobre Impacto Social",
+        description: "Como a tecnologia pode transformar comunidades",
+        videoId: "dQw4w9WgXcQ"
+    },
+    {
+        id: 2,
+        title: "Workshop de Liderança",
+        description: "Desenvolvimento de liderança para jovens",
+        videoId: "tgbNymZ7vqY"
+    },
+    {
+        id: 3,
+        title: "Evento Kumosi Impact Lab",
+        description: "Lançamento de iniciativas de impacto social",
+        videoId: "jgZQJtT4JbE"
+    }
+];
+
+// Renderizar fotos
+const photosGrid = document.getElementById('photosGrid');
+let currentFilter = 'all';
+
+function renderPhotos() {
+    const filtered = currentFilter === 'all' 
+        ? photos 
+        : photos.filter(p => p.category === currentFilter);
+    
+    photosGrid.innerHTML = filtered.map(photo => `
+        <div class="media-card" data-category="${photo.category}" onclick="openLightbox('${photo.image}')">
+            <img src="${photo.image}" alt="${photo.title}" loading="lazy">
+            <div class="media-info">
+                <h3>${photo.title}</h3>
+                <p>${photo.description}</p>
+                <span class="media-date"><i class="far fa-calendar-alt"></i> ${photo.date}</span>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Filtros
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        renderPhotos();
+    });
+});
+
+// Renderizar vídeos
+const videosGrid = document.getElementById('videosGrid');
+function renderVideos() {
+    videosGrid.innerHTML = videos.map(video => `
+        <div class="col-md-4">
+            <div class="video-card">
+                <div class="video-container">
+                    <iframe 
+                        src="https://www.youtube.com/embed/${video.videoId}" 
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+                <div class="video-info">
+                    <h3>${video.title}</h3>
+                    <p>${video.description}</p>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Lightbox
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+function openLightbox(imageSrc) {
+    lightbox.classList.add('active');
+    lightboxImg.src = imageSrc;
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+});
+
+// Tecla ESC fecha lightbox
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+    }
+});
+
+// Inicializar
+renderPhotos();
+renderVideos();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+<script>
+gtag('event', 'purchase', {
+  value: 100,
+  currency: 'USD'
+});
+</script>
+
+
+
+
+<img src="imagens/amelia.jpeg">
